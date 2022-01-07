@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block scripts %}
+<script src="/cbor.js"></script>
+<script src="/webauthn.js"></script>
+{{super()}}
+{% endblock %}
+
+{% block app_content %}
+<h1>Welcome to the RePass Demo Website</h1>
+<hr>
+
+<div class="row">
+  <div class="col-sm-4">
+    <form id="loginform" action="" method="post" class="form" role="form">
+      <div class="form-group  required"><label class="control-label" for="username">Username</label>
+        <input class="form-control" id="username" name="username" required type="text" value="">
+      </div>
+      <input class="btn btn-default" onclick="register_cred();" id="register" name="register" type="button"
+        value="Register">
+      <input class="btn btn-default" onclick="auth_cred();" id="authenticate" name="authenticate" type="button"
+        value="Authenticate">
+      <input class="btn btn-default" onclick="register_recovery_cred();" id="recover" name="recover" type="button"
+        value="Recover">
+    </form>
+  </div>
+</div>
+{% endblock %}

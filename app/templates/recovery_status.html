@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block app_content %}
+<h1>Recovery Status - RePass Demo Website</h1>
+<hr>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>Request-ID</td>
+            <td>{{req.id}}</td>
+        </tr>
+        <tr>
+            <td>Request-Status</td>
+            <td>{{ req.status }}</td>
+        </tr>
+        <tr>
+            <td>Recovered Credential ID</td>
+            <td>{{ req.recovered_credential_id }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% if req.status == "pending" %}
+Credentials that can recover:
+{% for cred in approving_creds %}
+<li>{{ cred.credential_id}}<br>
+    Enter this URL into RePass:
+    <strong>{{ request.host_url }}recovery_approve_begin/{{req.id}}/{{ cred.credential_id}}</strong>
+</li>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

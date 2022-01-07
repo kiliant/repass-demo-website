@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block scripts %}
+<script src="/cbor.js"></script>
+<script src="/webauthn.js"></script>
+{{super()}}
+{% endblock %}
+
+{% block app_content %}
+<h1>Settings - RePass Demo Website</h1>
+<hr>
+
+{% if not rp_avail %}
+<div class="alert alert-danger" role="alert">
+  <b>RePass Recovery Status: not available.</b>
+</div>
+{% else %}
+<div class="alert alert-success" role="alert">
+  <b>RePass Recovery Status: available.</b>
+</div>
+{% endif %}
+
+<div class="container" style="margin-top: 70px;">
+  Recovery Credentials:
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th>Actions <a class="btn btn-success" role="button" href="/repass_add"> Add</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cred in current_user.recovery_credentials %}
+      <tr>
+        <td>{{ cred.credential_id}}</td>
+        <td>{{ cred.description}}</td>
+        <td>
+          <a role="button" href="/repass_rm/{{cred.credential_id}}" class="btn btn-danger">Remove</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<form>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">How many approvals are required for RePass Recovery</label>
+    <select onchange="selectChange(this);" class="form-control" style="width: 50px;" id="ftormControlSelect">
+      {% for cred in current_user.recovery_credentials %}
+      <option {% if loop.index == current_user.approvals_needed %}selected{% endif %}>{{loop.index}}</option>
+      {% endfor %}
+    </select>
+    out of <b>{{current_user.recovery_credentials|length}}</b> required.
+  </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+flask
+python-dotenv
+fido2
+flask_bootstrap
+flask_login
+flask_migrate
+flask_wtf
+flask_sqlalchemy

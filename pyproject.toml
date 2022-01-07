@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "repass-demo-website"
+version = "0.1.0"
+description = ""
+authors = ["Thomas Kilian <thomas.kilian@mailbox.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Flask = "^2.0.2"
+python-dotenv = "^0.19.2"
+fido2 = "^0.9.3"
+Flask-Bootstrap = "^3.3.7"
+Flask-Login = "^0.5.0"
+Flask-Migrate = "^3.1.0"
+Flask-WTF = "^1.0.0"
+Flask-SQLAlchemy = "^2.5.1"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

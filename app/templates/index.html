@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block app_content %}
+<h1>Welcome to the RePass Demo Website</h1>
+<hr>
+{% if current_user.is_authenticated %}
+Current User {{ current_user.username }} (ID: {{ current_user.id}})<br />
+Using Credential {% for c in current_user.credentials %}{{ c.credential_id }}{% endfor %}
+<a href="/logout">Logout</a>
+{% else %}
+Not authenticated.
+{% endif %}
+{% endblock %}
